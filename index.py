@@ -1,4 +1,4 @@
-from http.server import BaseHTTPRequestHandler, HTTPServer
+from http.server import BaseHTTPRequestHandler, HTTPServer, ThreadingHTTPServer
 
 class MyServer(BaseHTTPRequestHandler):
     def do_GET(self):
@@ -11,5 +11,9 @@ class MyServer(BaseHTTPRequestHandler):
     def log_message(self, format, *args):
         return
 
-httpd = HTTPServer(("python-server", 8084), MyServer)
-httpd.serve_forever()
+# httpd = HTTPServer(("python-server", 8084), MyServer)
+# httpd.serve_forever()
+
+
+with ThreadingHTTPServer(("python-server", 8084), MyServer) as httpd:
+    httpd.serve_forever()
