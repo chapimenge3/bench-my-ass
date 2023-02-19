@@ -23,11 +23,9 @@ services:
     volumes: ['.:/root']
 
   python-server:
-    image: python:3         
+    image: japronto/japronto       
     working_dir: /root
-    command: >
-      sh -c "bash -c "pip3 install git+https://github.com/squeaky-pl/japronto && 
-             python3 index.py"
+    command: --port 8084 --script index.py
     networks: [net]
     volumes: ['.:/root']
 
